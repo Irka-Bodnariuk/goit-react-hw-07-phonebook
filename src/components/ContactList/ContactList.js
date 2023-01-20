@@ -9,8 +9,8 @@ export const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
 
-  const filteredPhoneBook = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase().trim())
+  const filteredPhoneBook = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter.toLowerCase().trim())
   );
 
   return (

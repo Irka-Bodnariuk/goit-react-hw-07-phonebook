@@ -18,7 +18,7 @@ export const ContactForm = () => {
       contact => contact.name === name.value
     );
     notDuplicationName !== undefined
-      ? alert(`${name.value} is already in contacts.`)
+      ? alert(`"${name.value}" is already in contacts.`)
       : dispatch(addContact(name.value, number.value));
     event.currentTarget.reset();
   };

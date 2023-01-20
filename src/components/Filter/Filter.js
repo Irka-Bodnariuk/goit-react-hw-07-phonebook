@@ -10,7 +10,8 @@ export const Filter = () => {
   const dispatch = useDispatch();
 
   const changeFilter = event => {
-    dispatch(setFilter(event.target.value));
+    const { value } = event.target;
+    dispatch(setFilter(value));
   };
 
   return (
