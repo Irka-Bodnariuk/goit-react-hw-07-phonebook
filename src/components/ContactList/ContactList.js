@@ -5,12 +5,12 @@ import { getFilter, getContacts } from 'redux/selectors';
 import { List, Item, Button } from './ContactList.styled';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filterContacts = useSelector(getFilter);
   const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
 
-  const filteredPhoneBook = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filterContacts.toLowerCase())
+  const filteredPhoneBook = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase().trim())
   );
 
   return (
@@ -18,7 +18,7 @@ export const ContactList = () => {
       {filteredPhoneBook.map(({ id, name, number }) => {
         return (
           <Item key={id}>
-            {name}: {number}{' '}
+            {name}: {number}
             <Button type="button" onClick={() => dispatch(deleteContact(id))}>
               Delete
             </Button>
