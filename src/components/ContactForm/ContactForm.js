@@ -1,25 +1,30 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import { getContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/selectors';
 
 import { Form, Label, Input, Button } from './ContactForm.styled';
 
 export const ContactForm = () => {
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = event => {
     event.preventDefault();
+
     const {
-      elements: { name, number },
+      elements: {
+        name: { value: name },
+        phone: { value: phone },
+      },
     } = event.currentTarget;
 
-    const notDuplicationName = contacts.find(
-      contact => contact.name === name.value
-    );
+    const contact = { name, phone };
+
+    const notDuplicationName = contacts.find(contact => contact.name === name);
     notDuplicationName !== undefined
-      ? alert(`"${name.value}" is already in contacts.`)
-      : dispatch(addContact(name.value, number.value));
+      ? alert(`"${name}" is already in contacts.`)
+      : dispatch(addContact(contact));
+
     event.currentTarget.reset();
   };
 
@@ -39,7 +44,7 @@ export const ContactForm = () => {
         Number
         <Input
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
