@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'redux/operations';
-import { selectError, selectIsLoading } from 'redux/selectors';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchContacts } from "redux/operations";
+import { selectError, selectIsLoading } from "redux/selectors";
 
-import { GlobalStyle } from '../GlobalStyle';
+import { GlobalStyle } from "../GlobalStyle";
 
-import { Filter } from 'components/Filter/Filter';
-import { ContactForm } from 'components/ContactForm/ContactForm';
-import { ContactList } from 'components/ContactList/ContactList';
+import { Filter } from "components/Filter/Filter";
+import { ContactForm } from "components/ContactForm/ContactForm";
+import { ContactList } from "components/ContactList/ContactList";
 
-import { Box, TiTle } from './App.styled';
+import { Box, TiTle } from "./App.styled";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -24,8 +24,8 @@ export const App = () => {
       <GlobalStyle />
       <TiTle>Phonebook</TiTle>
       <ContactForm />
-      {isLoading && !error && <b>Request in progress...</b>}
       <TiTle>Contacts</TiTle>
+      {isLoading && !error && <b>Request in progress...</b>}
       <Filter />
       <ContactList />
     </Box>
